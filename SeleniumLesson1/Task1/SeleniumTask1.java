@@ -26,6 +26,7 @@ public class SeleniumTask1 {
     driver = new ChromeDriver();
     baseUrl = "https://www.sberbank.ru/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().window().maximize();
   }
 
   @Test
@@ -33,23 +34,20 @@ public class SeleniumTask1 {
     driver.get(baseUrl + "/ru/person");
     driver.findElement(By.cssSelector("span.region-list__arrow")).click();
 
-    Wait<WebDriver> wait = new WebDriverWait(driver, 1, 3000);
+    Wait<WebDriver> wait = new WebDriverWait(driver, 2, 3000);
     wait.until(ExpectedConditions.visibilityOf(
-            driver.findElement(By.xpath("//*[@class='region-list__modal-caption']"))));
+            driver.findElement(By.xpath("//*[@class='region-search-box']"))));
 
-    driver.findElement(By.xpath("/html/body/div[6]/div/div[1]/div/div[2]/div/div[1]/div/div[1]/input")).
-            sendKeys("Нижегородская область");
+    driver.findElement(By.xpath("//*[@class='kit-input kit-autocomplete-input__input']//input")).sendKeys("Нижегородская область");
 
-    wait = new WebDriverWait(driver, 2, 1000);
     wait.until(ExpectedConditions.visibilityOf(
-              driver.findElement(By.xpath("/html/body/div[7]/div/div/div"))));
+              driver.findElement(By.xpath("//*[@class='kit-autocomplete-input__option']"))));
 
-    driver.findElement(By.xpath("/html/body/div[7]/div/div/div")).click();
-    driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+    driver.findElement(By.xpath("//*[@class='kit-autocomplete-input__option']")).click();
 
-    assertTrue(isElementPresent(By.xpath("//*[text()='Нижегородская область']")));
+    assertTrue(isElementPresent(By.xpath("//span[contains(text(),'Нижегородская область')]//.")));
 
-    WebElement element = driver.findElement(By.xpath("//*[@class='social social_section_person']//div"));
+    WebElement element = driver.findElement(By.xpath("//*[@class='social social_section_person']//."));
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
     assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_fb']")));

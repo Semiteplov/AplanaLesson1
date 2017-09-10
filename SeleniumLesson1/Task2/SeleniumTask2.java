@@ -31,68 +31,69 @@ public class SeleniumTask2 {
   @Test
   public void testSeleniumTask2() throws Exception {
     driver.get(baseUrl + "/ru/person");
-    driver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
-    driver.findElement(By.xpath("//*//div/div/ul/li[5]/a/span")).click();
+    driver.findElement(By.xpath("//span[contains(text(),'Застраховать себя')]")).click();
     driver.findElement(By.linkText("Страхование путешественников")).click();
 
     driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 
-    isElementPresent(By.xpath("//h1/.[text()='Страхование путешественников']"));
+    isElementPresent(By.xpath("//h1[text()='Страхование путешественников']"));
 
-    driver.findElement(By.xpath("//a//*[text()='Оформить онлайн']")).click();
-    driver.findElement(By.xpath("//p/a/img")).click();
-    driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+    driver.findElement(By.xpath("//*[text()='Оформить онлайн']")).click();
+    driver.findElement(By.xpath("//div[@class='sbrf-rich-outer']//img")).click();
+    // driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 
     for(String winHandle : driver.getWindowHandles()){
         driver.switchTo().window(winHandle);
     }
 
-    WebElement element = driver.findElement(By.xpath("//*//section/section/section[2]/div[1]/div[1]/div"));
+    WebElement element = driver.findElement(By.xpath("//*[contains(text(), 'Минимальная')]"));
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
-    driver.findElement(By.xpath("//*[@id=\"views\"]/form/section/section/section[2]/div[1]/div[1]/div")).click();
+    driver.findElement(By.xpath("//*[contains(text(), 'Минимальная')]")).click();
 
-    element = driver.findElement(By.xpath("//*[@id=\"views\"]/form/section/section/section[6]/span/span"));
+    element = driver.findElement(By.xpath("//*[@class='b-button-block-center']//span[contains(text(), 'Оформить')]"));
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
-    driver.findElement(By.xpath("//*[@id=\"views\"]/form/section/section/section[6]/span/span")).click();
+    driver.findElement(By.xpath("//*[@class='b-button-block-center']//span[contains(text(), 'Оформить')]")).click();
     driver.findElement(By.name("insured0_surname")).clear();
     driver.findElement(By.name("insured0_surname")).sendKeys("Ivanov");
     driver.findElement(By.name("insured0_name")).clear();
     driver.findElement(By.name("insured0_name")).sendKeys("Ivan");
-    driver.findElement(By.xpath("//*//section/section[1]/div/insured-input/div/fieldset[4]/div/img")).click();
-    driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[1]/td[5]/a")).click();
+    driver.findElement(By.name("insured0_birthDate")).clear();
+    driver.findElement(By.name("insured0_birthDate")).sendKeys("11112000");
     driver.findElement(By.name("surname")).clear();
     driver.findElement(By.name("surname")).sendKeys("Петров");
     driver.findElement(By.name("name")).clear();
     driver.findElement(By.name("name")).sendKeys("Петр");
     driver.findElement(By.name("middlename")).clear();
     driver.findElement(By.name("middlename")).sendKeys("Петрович");
-    driver.findElement(By.xpath("//*//section/form/section/section[2]/div/fieldset[7]/div/img")).click();
-    driver.findElement(By.xpath("//*//table/tbody/tr[1]/td[6]/a")).click();
+    driver.findElement(By.name("birthDate")).clear();
+    driver.findElement(By.name("birthDate")).sendKeys("08071967");
 
-    element = driver.findElement(By.xpath("//*//form/section/section[3]/div/fieldset[1]/div[1]/input"));
+    element = driver.findElement(By.xpath("//h3[contains(text(), 'Данные паспорта РФ')]"));
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
     driver.findElement(By.name("passport_series")).clear();
     driver.findElement(By.name("passport_series")).sendKeys("1111");
     driver.findElement(By.name("passport_number")).clear();
     driver.findElement(By.name("passport_number")).sendKeys("111111");
-    driver.findElement(By.xpath("//*//form/section/section[3]/div/fieldset[2]/div/img")).click();
-    driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[1]/td[6]/a")).click();
+    driver.findElement(By.name("issueDate")).clear();
+    driver.findElement(By.name("issueDate")).sendKeys("01021945");
     driver.findElement(By.name("issuePlace")).clear();
     driver.findElement(By.name("issuePlace")).sendKeys("Афыв");
-    driver.findElement(By.xpath("//*[@id=\"views\"]/section/form/section/section[5]/div[1]/span[2]")).click();
+    driver.findElement(By.xpath("//span[contains(text(), 'Продолжить')]")).click();
 
     assertTrue(driver.findElement(By.xpath("//*[text()='Заполнены не все обязательные поля']")).isDisplayed());
     assertEquals("Ivanov", driver.findElement(By.name("insured0_surname")).getAttribute("value"));
     assertEquals("Ivan", driver.findElement(By.name("insured0_name")).getAttribute("value"));
-    assertEquals("Ivan", driver.findElement(By.name("insured0_name")).getAttribute("value"));
+    assertEquals("11.11.2000", driver.findElement(By.name("insured0_birthDate")).getAttribute("value"));
     assertEquals("Петров", driver.findElement(By.name("surname")).getAttribute("value"));
     assertEquals("Петр", driver.findElement(By.name("name")).getAttribute("value"));
     assertEquals("Петрович", driver.findElement(By.name("middlename")).getAttribute("value"));
+    assertEquals("08.07.1967", driver.findElement(By.name("birthDate")).getAttribute("value"));
     assertEquals("1111", driver.findElement(By.name("passport_series")).getAttribute("value"));
     assertEquals("111111", driver.findElement(By.name("passport_number")).getAttribute("value"));
+    assertEquals("01.02.1945", driver.findElement(By.name("issueDate")).getAttribute("value"));
     assertEquals("Афыв", driver.findElement(By.name("issuePlace")).getAttribute("value"));
   }
 

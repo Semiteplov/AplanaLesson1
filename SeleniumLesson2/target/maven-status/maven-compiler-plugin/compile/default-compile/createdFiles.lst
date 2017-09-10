@@ -1,0 +1,6 @@
+Pages\MainPage.class
+Pages\TravelInsurancePage.class
+Pages\SendAppPage.class
+Pages\BasePage.class
+Pages\PolicyPage.class
+TestProperties.class
