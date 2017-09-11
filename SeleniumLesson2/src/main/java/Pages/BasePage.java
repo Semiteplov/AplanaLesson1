@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BasePage {
     WebDriver driver;
-    Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
+    Wait<WebDriver> wait;
 
     public boolean isElementPresent(By by) {
         try {

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class BaseTest {
     protected static WebDriver driver;
     protected static String baseUrl;
-    protected static Properties properties = TestProperties.getInstance().getProperties();
+    public static Properties properties = TestProperties.getInstance().getProperties();
 
     @BeforeClass
     public static void setUp() throws Exception {

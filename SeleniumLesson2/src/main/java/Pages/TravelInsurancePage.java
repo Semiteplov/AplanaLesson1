@@ -1,10 +1,12 @@
 package Pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TravelInsurancePage extends BasePage {
@@ -21,6 +23,10 @@ public class TravelInsurancePage extends BasePage {
     }
 
     public void checkTitle() {
-        assertTrue(driver.getTitle().equals("Страхование путешественников"));
+        assertEquals("«Сбербанк» - Страхование путешественников", driver.getTitle().toString());
+    }
+
+    public void scrollToIssueButton() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", issueButton);
     }
 }
