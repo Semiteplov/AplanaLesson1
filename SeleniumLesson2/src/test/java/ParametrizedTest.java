@@ -61,7 +61,7 @@ public class ParametrizedTest extends BaseTest {
     @Parameterized.Parameter(10)
     public /* NOT private */ String issuePlace;
 
-   // @Ignore
+    @Ignore
     @Test
     public void testInsurance() throws Exception {
         driver.get(baseUrl + "/ru/person");
@@ -101,7 +101,7 @@ public class ParametrizedTest extends BaseTest {
 
         driver.findElement(By.xpath("//span[contains(text(), 'Продолжить')]")).click();
 
-       isElementExist(By.xpath("//*[text()='Заполнены не все обязательные поля']"));
+        isElementExist(By.xpath("//*[text()='Заполнены не все обязательные поля']"));
 
         checkFillField(insuredSurname, By.name("insured0_surname"));
         checkFillField(insuredName, By.name("insured0_name"));

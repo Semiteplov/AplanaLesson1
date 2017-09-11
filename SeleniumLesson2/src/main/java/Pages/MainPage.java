@@ -1,12 +1,14 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MainPage extends BasePage {
@@ -47,11 +49,17 @@ public class MainPage extends BasePage {
         regionList.findElement(By.xpath("//a[contains(text(),'" + value + "')]")).click();
     }
 
-    protected void isElementExist(WebElement element) {
-        assertTrue(element.isDisplayed());
+    public void checkRegion(String value) {
+        assertEquals("Нижегородская область", region.getText());
     }
 
-    public void selectSocialIcon(String value) {
-        socialList.findElement(By.xpath("//span[contains(@class, 'social__icon social__icon_type_" + value + "')]"));
+    public void checkSocialItems() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", socialList);
+        assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_fb']")));
+        assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_tw']")));
+        assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_yt']")));
+        assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_ins']")));
+        assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_vk']")));
+        assertTrue(isElementPresent(By.xpath("//*[@class='social__icon social__icon_type_ok']")));
     }
 }

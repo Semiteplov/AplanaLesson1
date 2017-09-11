@@ -59,31 +59,31 @@ public class SendAppPage extends BasePage {
             case "Name":
                 fillField(insuredName, value);
                 break;
-            case "Birth Date":
+            case "Birthday":
                 fillField(insuredBirthDate, value);
                 break;
-            case "Фамилия":
+            case "Surname1":
                 fillField(surname, value);
                 break;
-            case "Имя":
+            case "Name1":
                 fillField(name, value);
                 break;
-            case "Отчество":
+            case "Middlename":
                 fillField(middlename, value);
                 break;
-            case "Дата рождения":
+            case "Birthday1":
                 fillField(birthDate, value);
                 break;
-            case "Серия паспорта":
+            case "Passport series":
                 fillField(passportSeries, value);
                 break;
-            case "Номер паспорта":
+            case "Passport number":
                 fillField(passportNumber, value);
                 break;
-            case "Дата выдачи":
+            case "Issue day":
                 fillField(issueDate, value);
                 break;
-            case "Кем выдан":
+            case "Issue place":
                 fillField(issuePlace, value);
                 break;
             default:

@@ -12,7 +12,7 @@ public class PolicyPage extends BasePage {
     public WebElement kindOfInsurance;
 
     @FindBy(xpath = "//*[@class='b-button-block-center']//span[contains(text(), 'Оформить')]")
-    private WebElement issueButton;
+    public WebElement issueButton;
 
     public PolicyPage(WebDriver driver) {
         PageFactory.initElements(driver, this);

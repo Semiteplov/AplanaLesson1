@@ -2,12 +2,13 @@ package Pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
 public class BasePage {
     WebDriver driver;
-    Wait<WebDriver> wait;
+    Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
 
     public boolean isElementPresent(By by) {
         try {
